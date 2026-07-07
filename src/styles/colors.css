@@ -1,0 +1,32 @@
+:root {
+  /* Base palette */
+  --black-1: #0b0b0c;   /* page/panel background */
+  --black-2: #131314;   /* alternate panel background */
+  --black-3: #141415;   /* hover surface */
+  --black-4: #1a1a1a;   /* avatar/media placeholder bg */
+  --coral: #d9684f;     /* brand accent — primary */
+  --coral-hover: #e8846c;
+  --cream: #f1efe9;     /* primary text on dark */
+  --grey-1: #b5b2ac;    /* secondary text / body copy */
+  --grey-2: #8c8a86;    /* tertiary text / meta */
+  --grey-3: #5b5a57;    /* quiet labels, dividers text */
+  --line: rgba(241,239,233,.12);   /* hairline borders */
+  --line-soft: rgba(241,239,233,.1);
+  --line-strong: rgba(241,239,233,.2);
+  --line-tag: rgba(241,239,233,.14);
+
+  /* Semantic aliases */
+  --surface: var(--black-1);
+  --surface-alt: var(--black-2);
+  --surface-hover: var(--black-3);
+  --surface-media: var(--black-4);
+  --text-primary: var(--cream);
+  --text-secondary: var(--grey-1);
+  --text-tertiary: var(--grey-2);
+  --text-quiet: var(--grey-3);
+  --accent: var(--coral);
+  --accent-hover: var(--coral-hover);
+  --border: var(--line);
+  --border-soft: var(--line-soft);
+  --border-strong: var(--line-strong);
+}

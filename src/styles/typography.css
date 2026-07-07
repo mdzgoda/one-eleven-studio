@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Font families */
+  --font-display: 'Schibsted Grotesk', sans-serif;   /* headings */
+  --font-body: 'Hanken Grotesk', sans-serif;          /* body copy, UI labels */
+  --font-mono: 'Space Mono', monospace;                /* eyebrows, meta, room/spec labels */
+
+  /* Display scale (Schibsted Grotesk, weight 600, tight tracking -.01em) */
+  --text-display-xl: 600 72px/1.08 var(--font-display);   /* H1 hero */
+  --text-display-lg: 600 44px/1.15 var(--font-display);   /* stat numbers */
+  --text-display-md: 600 36px/1.2 var(--font-display);    /* H2 section */
+  --text-display-sm: 600 21px/1.3 var(--font-display);    /* card heading */
+
+  /* Body scale (Hanken Grotesk) */
+  --text-body-lg: 400 18px/1.5 var(--font-body);
+  --text-body-md: 400 14px/1.6 var(--font-body);
+  --text-body-sm: 400 13px/1.5 var(--font-body);
+  --text-label: 500 14px/1 var(--font-body);              /* buttons */
+
+  /* Mono scale (Space Mono) — eyebrows, tags, specs */
+  --text-mono-eyebrow: 400 13px/1 var(--font-mono);
+  --text-mono-tag: 400 11px/1 var(--font-mono);
+
+  --tracking-tight: -0.01em;
+  --tracking-eyebrow: 0.1em;
+  --tracking-label: 0.02em;
+}
