@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap');
+
+:root {
+  --black-1: #0b0b0c;
+  --black-2: #131314;
+  --black-3: #141415;
+  --black-4: #1a1a1a;
+  --coral: #d9684f;
+  --coral-hover: #e8846c;
+  --cream: #f1efe9;
+  --grey-1: #b5b2ac;
+  --grey-2: #8c8a86;
+  --grey-3: #5b5a57;
+  --line: rgba(241, 239, 233, 0.12);
+  --line-soft: rgba(241, 239, 233, 0.1);
+  --line-strong: rgba(241, 239, 233, 0.2);
+  --line-tag: rgba(241, 239, 233, 0.14);
+
+  --surface: var(--black-1);
+  --surface-alt: var(--black-2);
+  --surface-hover: var(--black-3);
+  --surface-media: var(--black-4);
+  --text-primary: var(--cream);
+  --text-secondary: var(--grey-1);
+  --text-tertiary: var(--grey-2);
+  --text-quiet: var(--grey-3);
+  --accent: var(--coral);
+  --accent-hover: var(--coral-hover);
+  --border: var(--line);
+  --border-soft: var(--line-soft);
+  --border-strong: var(--line-strong);
+
+  --font-display: 'Instrument Sans', sans-serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.oes-preview-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-alt);
+}

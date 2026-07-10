@@ -1,0 +1,190 @@
+/*
+  Themes the Decap CMS editor chrome (not just the preview pane) to match
+  the neutral dark/cream "Content CMS" reference from the design system —
+  near-black canvas, cream text, subtle white-alpha borders, small radius.
+  Coral is intentionally NOT used here; it stays reserved for the branded
+  live preview pane so the tool itself doesn't compete with the site.
+
+  Decap's CSS-in-JS classnames embed a stable component-name fragment
+  (e.g. "css-xxxx-SidebarNavLink"), so these selectors target that
+  fragment via [class*="Name"] rather than the volatile hash prefix.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap');
+
+:root {
+  --oes-bg: #0e0e0d;
+  --oes-fg: #f2f1ec;
+  --oes-border: rgba(255, 255, 255, 0.12);
+  --oes-border-strong: rgba(255, 255, 255, 0.2);
+  --oes-card-bg: rgba(255, 255, 255, 0.02);
+  --oes-hover-bg: rgba(255, 255, 255, 0.08);
+  --oes-field-bg: rgba(0, 0, 0, 0.25);
+}
+
+body {
+  background: var(--oes-bg) !important;
+  font-family: 'Hanken Grotesk', sans-serif !important;
+}
+
+/* Canvas */
+html,
+body,
+[class*="AppMainContainer"],
+[class*="EditorContainer"],
+[class*="CollectionContainer"] {
+  background: var(--oes-bg) !important;
+  color: var(--oes-fg);
+}
+
+/* Top header bar */
+[class*="AppHeader"] {
+  background: var(--oes-bg) !important;
+  border-bottom: 1px solid var(--oes-border) !important;
+}
+[class*="AppHeaderNavLink"],
+[class*="AppHeaderButton"] {
+  color: var(--oes-fg) !important;
+}
+
+/* Every Decap "Card" component instance shares a "-card-card" classname
+   fragment (sidebar panel, collection top header, list cards, ...) */
+[class*="-card-card"] {
+  background: var(--oes-card-bg) !important;
+  border: 1px solid var(--oes-border) !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar collections panel */
+[class*="SidebarContainer"] {
+  background: var(--oes-card-bg) !important;
+  border: 1px solid var(--oes-border) !important;
+  box-shadow: none !important;
+}
+[class*="SidebarHeading"] {
+  color: rgba(242, 241, 236, 0.55) !important;
+}
+[class*="SidebarNavLink"] {
+  color: var(--oes-fg) !important;
+}
+[class*="SidebarNavLink"].sidebar-active {
+  background: var(--oes-hover-bg) !important;
+}
+[class*="SidebarNavLink"]:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Search box */
+[class*="SearchInput"] {
+  background: var(--oes-field-bg) !important;
+  border: 1px solid var(--oes-border-strong) !important;
+  color: var(--oes-fg) !important;
+  border-radius: 4px !important;
+}
+
+/* Collection entry list */
+[class*="CollectionTopHeading"] {
+  color: var(--oes-fg) !important;
+}
+[class*="ListCard-card-card"] {
+  background: var(--oes-card-bg) !important;
+  border: 1px solid var(--oes-border) !important;
+  box-shadow: none !important;
+}
+[class*="ListCardTitle"] {
+  color: var(--oes-fg) !important;
+}
+[class*="ListCardLink"]:hover [class*="ListCard-card-card"] {
+  background: var(--oes-hover-bg) !important;
+}
+
+/* Entry editor toolbar */
+[class*="ToolbarContainer"] {
+  background: var(--oes-bg) !important;
+  border-bottom: 1px solid var(--oes-border) !important;
+  color: var(--oes-fg);
+}
+[class*="ToolbarContainer"] a,
+[class*="ToolbarContainer"] span,
+[class*="ToolbarSectionBackLink"] {
+  color: var(--oes-fg) !important;
+}
+[class*="PublishedButton"],
+[class*="DeleteButton"] {
+  border-radius: 4px !important;
+}
+/* Status/publish badge and delete button use light pastel fills by default —
+   swap to dark-tinted fills so the (forced-cream) text stays legible */
+[class*="PublishedToolbarButton"],
+[class*="publishedButton"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--oes-fg) !important;
+}
+[class*="DeleteButton"] {
+  background: rgba(214, 0, 50, 0.15) !important;
+  color: rgb(255, 140, 140) !important;
+  border: 1px solid rgba(214, 0, 50, 0.4) !important;
+}
+
+/* Field labels & hints */
+[class*="FieldLabel"] {
+  color: rgba(242, 241, 236, 0.6) !important;
+  background: transparent !important;
+}
+[class*="ControlHint"] {
+  color: rgba(242, 241, 236, 0.45) !important;
+}
+
+/* Image widget: asset preview box + its action buttons */
+[class*="FileWidgetButton"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--oes-fg) !important;
+  border: 1px solid var(--oes-border-strong) !important;
+}
+.css-83wr9v {
+  background: var(--oes-field-bg) !important;
+  border-color: var(--oes-border-strong) !important;
+}
+
+/* Nested object-field group boxes (Branding, Strona główna, ...) */
+[class*="TopBarContainer"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-bottom: 1px solid var(--oes-border) !important;
+}
+[class*="ControlContainer"] > div:has(> [class*="TopBarContainer"]) {
+  background: var(--oes-card-bg) !important;
+  border: 1px solid var(--oes-border) !important;
+  border-radius: 6px !important;
+}
+[class*="ExpandButton"] {
+  color: var(--oes-fg) !important;
+}
+
+/* List-widget collapsed item rows (e.g. gear "Pozycje") */
+[class*="NestedObjectLabel"],
+[class*="StyledListItemTopBar"] {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--oes-fg) !important;
+}
+[class*="StyledListItemTopBar"] svg {
+  fill: var(--oes-fg) !important;
+}
+
+/* Inputs — native elements, robust regardless of Decap's internal class names */
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
+textarea,
+select,
+[class*="TextControl"] {
+  background: var(--oes-field-bg) !important;
+  color: var(--oes-fg) !important;
+  border: 1px solid var(--oes-border-strong) !important;
+  border-radius: 4px !important;
+}
+input::placeholder,
+textarea::placeholder {
+  color: rgba(242, 241, 236, 0.4) !important;
+}

@@ -10,8 +10,6 @@ public_folder: /uploads
 collections:
   - name: site
     label: Ustawienia strony
-    editor:
-      preview: false
     files:
       - name: site
         label: Teksty strony
@@ -21,13 +19,13 @@ collections:
             name: branding
             widget: object
             fields:
-              - { label: 'Logo (znak)', name: logoMark, widget: image }
+              - { label: 'Logo (znak)', name: logoMark, widget: image, hint: 'Widoczne w nagłówku i stopce na każdej stronie' }
           - label: Strona główna
             name: home
             widget: object
             fields:
-              - { label: 'Zdjęcie hero', name: heroImage, widget: image }
-              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: 'Zdjęcie hero', name: heroImage, widget: image, hint: 'Duże zdjęcie po prawej stronie sekcji hero na stronie głównej' }
+              - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały, wielkimi literami napis nad głównym tytułem hero' }
               - { label: 'Tytuł hero (linia 1)', name: heroTitleLine1, widget: string }
               - { label: 'Tytuł hero (linia 2)', name: heroTitleLine2, widget: string }
               - { label: 'Tekst hero', name: heroText, widget: text }
@@ -47,23 +45,23 @@ collections:
             name: gearPage
             widget: object
             fields:
-              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały napis nad tytułem na górze strony /gear' }
               - { label: Tytuł, name: title, widget: string }
               - { label: Podtytuł, name: subtitle, widget: text }
           - label: Strona ekipy
             name: crewPage
             widget: object
             fields:
-              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały napis nad tytułem na górze strony /crew' }
               - { label: Tytuł, name: title, widget: string }
           - label: Strona rezerwacji
             name: bookingPage
             widget: object
             fields:
-              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały napis nad tytułem na górze strony /book' }
               - { label: Tytuł, name: title, widget: string }
               - { label: Podtytuł, name: subtitle, widget: text }
-              - { label: 'Tekst podziękowania', name: thankYou, widget: text }
+              - { label: 'Tekst podziękowania', name: thankYou, widget: text, hint: 'Pokazywany zamiast formularza po jego wysłaniu' }
           - label: Stopka
             name: footer
             widget: object
