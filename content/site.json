@@ -1,0 +1,35 @@
+{
+  "home": {
+    "eyebrow": "Realizacja · Miks · Scoring",
+    "heroTitleLine1": "Brzmienie",
+    "heroTitleLine2": "ponad wszystko",
+    "heroText": "One Eleven Studio to profesjonalne studio nagraniowe stworzone z myślą o muzyce. Łączymy starannie dobrany analogowy sprzęt z nowoczesną realizacją, zapewniając przestrzeń, doświadczenie i ludzi potrzebnych do stworzenia nagrania na najwyższym poziomie.",
+    "primaryButtonLabel": "Zarezerwuj sesję",
+    "secondaryButtonLabel": "Zobacz sprzęt",
+    "roomsEyebrow": "Sale",
+    "roomsTitle": "Trzy sale. Jedna filozofia.",
+    "gearEyebrow": "Magazyn Sprzętu",
+    "rentEyebrow": "Wypożycz Rzadkości",
+    "rentTitle": "Nie możesz znaleźć odpowiedniej partii? Wypożycz instrument — razem z osobą, która poświęciła mu życie.",
+    "crewEyebrow": "Ekipa",
+    "crewTitle": "Tworzona przez ludzi, nie presety.",
+    "testimonialsEyebrow": "W Ich Słowach",
+    "ctaTitle": "Gotowi nagrywać?",
+    "ctaButtonLabel": "Sprawdź Dostępność"
+  },
+  "gearPage": {
+    "eyebrow": "Magazyn Sprzętu",
+    "title": "Cały sprzęt, jedna lista.",
+    "subtitle": "Czterdzieści lat vintage'owego i nowoczesnego sprzętu — dostępne z każdą sesją."
+  },
+  "crewPage": {
+    "eyebrow": "Ekipa",
+    "title": "Tworzona przez ludzi, nie presety."
+  },
+  "bookingPage": {
+    "eyebrow": "Rezerwacja",
+    "title": "Umów sesję.",
+    "subtitle": "Podaj kilka szczegółów o sesji, a odezwiemy się w ciągu 24 godzin z dostępnością i wyceną.",
+    "thankYou": "Dziękujemy! Otrzymaliśmy Twoje zapytanie i odezwiemy się w ciągu 24 godzin."
+  }
+}

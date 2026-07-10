@@ -3,6 +3,9 @@ import { NavHeader } from '../components/navigation/NavHeader';
 import { Footer } from '../components/navigation/Footer';
 import { Eyebrow } from '../components/core/Eyebrow';
 import { Button } from '../components/core/Button';
+import { site } from '../content';
+
+const { bookingPage } = site;
 
 function Field({ label, placeholder, value, onChange }) {
   const [focus, setFocus] = useState(false);
@@ -52,19 +55,19 @@ export function Booking() {
       <div style={{ padding: '90px 52px 100px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
         <div>
           <div style={{ marginBottom: 18 }}>
-            <Eyebrow>Rezerwacja</Eyebrow>
+            <Eyebrow>{bookingPage.eyebrow}</Eyebrow>
           </div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 44, margin: '0 0 20px', letterSpacing: '-.01em' }}>
-            Umów sesję.
+            {bookingPage.title}
           </h1>
           <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: 420 }}>
-            Podaj kilka szczegółów o sesji, a odezwiemy się w ciągu 24 godzin z dostępnością i wyceną.
+            {bookingPage.subtitle}
           </p>
         </div>
         <div style={{ maxWidth: 440 }}>
           {submitted ? (
             <p style={{ fontSize: 16, color: 'var(--text-primary)', lineHeight: 1.6 }}>
-              Dziękujemy! Otrzymaliśmy Twoje zapytanie i odezwiemy się w ciągu 24 godzin.
+              {bookingPage.thankYou}
             </p>
           ) : (
             <form onSubmit={handleSubmit}>

@@ -1,0 +1,143 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: site
+    label: Ustawienia strony
+    editor:
+      preview: false
+    files:
+      - name: site
+        label: Teksty strony
+        file: content/site.json
+        fields:
+          - label: Strona główna
+            name: home
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: 'Tytuł hero (linia 1)', name: heroTitleLine1, widget: string }
+              - { label: 'Tytuł hero (linia 2)', name: heroTitleLine2, widget: string }
+              - { label: 'Tekst hero', name: heroText, widget: text }
+              - { label: 'Etykieta przycisku głównego', name: primaryButtonLabel, widget: string }
+              - { label: 'Etykieta przycisku drugorzędnego', name: secondaryButtonLabel, widget: string }
+              - { label: 'Eyebrow — sale', name: roomsEyebrow, widget: string }
+              - { label: 'Tytuł — sale', name: roomsTitle, widget: string }
+              - { label: 'Eyebrow — sprzęt', name: gearEyebrow, widget: string }
+              - { label: 'Eyebrow — wypożyczenia', name: rentEyebrow, widget: string }
+              - { label: 'Tytuł — wypożyczenia', name: rentTitle, widget: text }
+              - { label: 'Eyebrow — ekipa', name: crewEyebrow, widget: string }
+              - { label: 'Tytuł — ekipa', name: crewTitle, widget: string }
+              - { label: 'Eyebrow — opinie', name: testimonialsEyebrow, widget: string }
+              - { label: 'Tytuł CTA', name: ctaTitle, widget: string }
+              - { label: 'Etykieta przycisku CTA', name: ctaButtonLabel, widget: string }
+          - label: Strona sprzętu
+            name: gearPage
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Tytuł, name: title, widget: string }
+              - { label: Podtytuł, name: subtitle, widget: text }
+          - label: Strona ekipy
+            name: crewPage
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Tytuł, name: title, widget: string }
+          - label: Strona rezerwacji
+            name: bookingPage
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Tytuł, name: title, widget: string }
+              - { label: Podtytuł, name: subtitle, widget: text }
+              - { label: 'Tekst podziękowania', name: thankYou, widget: text }
+
+  - name: rooms
+    label: Sale
+    folder: content/rooms
+    create: true
+    slug: '{{fields.name}}'
+    extension: json
+    format: json
+    fields:
+      - { label: 'Etykieta (np. SALA A)', name: label, widget: string }
+      - { label: Nazwa, name: name, widget: string }
+      - { label: Opis, name: description, widget: text }
+      - { label: Specyfikacja, name: specs, widget: string }
+
+  - name: gear
+    label: Sprzęt
+    folder: content/gear
+    create: true
+    slug: '{{fields.title}}'
+    extension: json
+    format: json
+    fields:
+      - { label: 'Nazwa grupy', name: title, widget: string }
+      - label: Pozycje
+        name: items
+        widget: list
+        field: { label: Pozycja, name: item, widget: string }
+
+  - name: rentals
+    label: Wypożyczenia
+    folder: content/rentals
+    create: true
+    slug: '{{fields.name}}'
+    extension: json
+    format: json
+    fields:
+      - { label: Nazwa, name: name, widget: string }
+      - { label: Opis, name: description, widget: text }
+
+  - name: crew
+    label: Ekipa
+    folder: content/crew
+    create: true
+    slug: '{{fields.name}}'
+    extension: json
+    format: json
+    fields:
+      - { label: 'Imię i nazwisko', name: name, widget: string }
+      - { label: Rola, name: role, widget: string }
+      - { label: Bio, name: bio, widget: text }
+
+  - name: stats
+    label: Statystyki
+    folder: content/stats
+    create: true
+    slug: '{{fields.label}}'
+    extension: json
+    format: json
+    fields:
+      - { label: Wartość, name: value, widget: string }
+      - { label: Etykieta, name: label, widget: string }
+
+  - name: portfolio
+    label: Portfolio
+    folder: content/portfolio
+    create: true
+    slug: '{{fields.caption}}'
+    extension: json
+    format: json
+    fields:
+      - { label: 'Kolor tła', name: bg, widget: color }
+      - { label: Podpis, name: caption, widget: string }
+
+  - name: testimonials
+    label: Opinie
+    folder: content/testimonials
+    create: true
+    slug: '{{fields.attribution}}'
+    extension: json
+    format: json
+    fields:
+      - { label: Cytat, name: quote, widget: text }
+      - { label: Autor, name: attribution, widget: string }
