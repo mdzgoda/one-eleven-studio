@@ -1,5 +1,9 @@
 {
+  "branding": {
+    "logoMark": "/uploads/one-eleven-mark.svg"
+  },
   "home": {
+    "heroImage": "/uploads/hero-gear.webp",
     "eyebrow": "Realizacja · Miks · Scoring",
     "heroTitleLine1": "Brzmienie",
     "heroTitleLine2": "ponad wszystko",

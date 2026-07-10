@@ -17,10 +17,16 @@ collections:
         label: Teksty strony
         file: content/site.json
         fields:
+          - label: Branding
+            name: branding
+            widget: object
+            fields:
+              - { label: 'Logo (znak)', name: logoMark, widget: image }
           - label: Strona główna
             name: home
             widget: object
             fields:
+              - { label: 'Zdjęcie hero', name: heroImage, widget: image }
               - { label: Eyebrow, name: eyebrow, widget: string }
               - { label: 'Tytuł hero (linia 1)', name: heroTitleLine1, widget: string }
               - { label: 'Tytuł hero (linia 2)', name: heroTitleLine2, widget: string }
@@ -124,7 +130,7 @@ collections:
     label: Portfolio
     folder: content/portfolio
     create: true
-    slug: '{{fields.caption}}'
+    slug: '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}'
     extension: json
     format: json
     fields:
@@ -135,7 +141,7 @@ collections:
     label: Opinie
     folder: content/testimonials
     create: true
-    slug: '{{fields.attribution}}'
+    slug: '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}'
     extension: json
     format: json
     fields:

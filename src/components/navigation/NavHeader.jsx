@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import mark from '../../assets/one-eleven-mark.svg';
+import { site } from '../../content';
+
+const { branding } = site;
 
 const navLinks = [
   { href: '/#studio', label: 'Studio' },
@@ -42,7 +44,7 @@ export function NavHeader() {
       }}
     >
       <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        <img src={mark} style={{ height: 50, display: 'block' }} alt="One Eleven Studio" />
+        <img src={branding.logoMark} style={{ height: 50, display: 'block' }} alt="One Eleven Studio" />
       </Link>
       <div style={{ display: 'flex', gap: 32 }}>
         {navLinks.map((l) => (

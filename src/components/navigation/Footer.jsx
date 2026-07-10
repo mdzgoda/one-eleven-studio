@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import mark from '../../assets/one-eleven-mark.svg';
+import { site } from '../../content';
+
+const { branding } = site;
 
 function FooterLink({ children }) {
   const [hover, setHover] = useState(false);
@@ -20,7 +22,7 @@ export function Footer() {
     <div style={{ padding: '48px 52px 36px', borderTop: '1px solid var(--border)' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 32, marginBottom: 56 }}>
         <div>
-          <img src={mark} style={{ height: 28, display: 'block', marginBottom: 18 }} alt="One Eleven Studio" />
+          <img src={branding.logoMark} style={{ height: 28, display: 'block', marginBottom: 18 }} alt="One Eleven Studio" />
           <p style={{ fontSize: 13, color: 'var(--text-tertiary)', lineHeight: 1.6, maxWidth: 240, margin: 0 }}>
             Działające studio dla zespołów, ścieżek dźwiękowych i sprzętu, który nagrywa dobre podejście za pierwszym razem.
           </p>

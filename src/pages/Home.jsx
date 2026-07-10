@@ -6,7 +6,6 @@ import { Tag } from '../components/core/Tag';
 import { RoomCard } from '../components/cards/RoomCard';
 import { RentCard } from '../components/cards/RentCard';
 import { CrewCard } from '../components/cards/CrewCard';
-import heroGear from '../assets/hero-gear.webp';
 import { site, rooms, gearGroups, rentals, crew, stats, portfolio, testimonials } from '../content';
 
 const { home } = site;
@@ -28,7 +27,7 @@ export function Home() {
           }}
         >
           <img
-            src={heroGear}
+            src={home.heroImage}
             alt="Realizator dźwięku przy konsolecie mikserskiej"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
