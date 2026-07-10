@@ -8,11 +8,12 @@ function CornerMark({ style }) {
   );
 }
 
-export function CrewCard({ name, role, bio }) {
+export function CrewCard({ name, role, bio, photoSrc }) {
   const [hover, setHover] = useState(false);
   return (
     <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={{ opacity: hover ? 0.85 : 1, transition: 'opacity .2s ease' }}>
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '1', background: 'var(--surface-media)', marginBottom: 18 }}>
+      <div style={{ position: 'relative', width: '100%', aspectRatio: '1', background: 'var(--surface-media)', marginBottom: 18, overflow: 'hidden' }}>
+        {photoSrc && <img src={photoSrc} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1)' }} />}
         <CornerMark style={{ position: 'absolute', top: 8, left: 8 }} />
         <CornerMark style={{ position: 'absolute', top: 8, right: 8, transform: 'rotate(90deg)' }} />
         <CornerMark style={{ position: 'absolute', bottom: 8, right: 8, transform: 'rotate(180deg)' }} />

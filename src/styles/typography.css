@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap');
 
 :root {
   /* Font families */
-  --font-display: 'Schibsted Grotesk', sans-serif;   /* headings */
+  --font-display: 'Instrument Sans', sans-serif;   /* headings */
   --font-body: 'Hanken Grotesk', sans-serif;          /* body copy, UI labels */
   --font-mono: 'Space Mono', monospace;                /* eyebrows, meta, room/spec labels */
 
-  /* Display scale (Schibsted Grotesk, weight 600, tight tracking -.01em) */
+  /* Display scale (Instrument Sans, weight 600, tight tracking -.01em) */
   --text-display-xl: 600 72px/1.08 var(--font-display);   /* H1 hero */
   --text-display-lg: 600 44px/1.15 var(--font-display);   /* stat numbers */
   --text-display-md: 600 36px/1.2 var(--font-display);    /* H2 section */

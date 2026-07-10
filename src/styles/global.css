@@ -22,6 +22,9 @@ a {
   color: var(--accent);
   text-decoration: none;
 }
+a:hover {
+  color: var(--accent-hover);
+}
 
 img {
   max-width: 100%;
