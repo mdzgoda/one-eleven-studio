@@ -64,6 +64,27 @@ collections:
               - { label: Tytuł, name: title, widget: string }
               - { label: Podtytuł, name: subtitle, widget: text }
               - { label: 'Tekst podziękowania', name: thankYou, widget: text }
+          - label: Stopka
+            name: footer
+            widget: object
+            fields:
+              - { label: 'Hasło (tagline)', name: tagline, widget: text }
+              - { label: 'Nagłówek — odwiedź', name: visitHeading, widget: string }
+              - { label: 'Adres (linia 1)', name: addressLine1, widget: string }
+              - { label: 'Adres (linia 2)', name: addressLine2, widget: string }
+              - { label: Godziny, name: hours, widget: string }
+              - { label: 'Nagłówek — rezerwacja', name: bookingHeading, widget: string }
+              - { label: E-mail, name: email, widget: string }
+              - { label: Telefon, name: phone, widget: string }
+              - { label: 'Nagłówek — obserwuj', name: followHeading, widget: string }
+              - label: 'Linki społecznościowe'
+                name: socialLinks
+                widget: list
+                fields:
+                  - { label: Nazwa, name: label, widget: string }
+                  - { label: URL, name: url, widget: string }
+              - { label: Copyright, name: copyright, widget: string }
+              - { label: 'Notatka o dostępności', name: availabilityNote, widget: string }
 
   - name: rooms
     label: Sale

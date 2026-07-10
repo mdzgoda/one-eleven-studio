@@ -35,5 +35,23 @@
     "title": "Umów sesję.",
     "subtitle": "Podaj kilka szczegółów o sesji, a odezwiemy się w ciągu 24 godzin z dostępnością i wyceną.",
     "thankYou": "Dziękujemy! Otrzymaliśmy Twoje zapytanie i odezwiemy się w ciągu 24 godzin."
+  },
+  "footer": {
+    "tagline": "Działające studio dla zespołów, ścieżek dźwiękowych i sprzętu, który nagrywa dobre podejście za pierwszym razem.",
+    "visitHeading": "Odwiedź",
+    "addressLine1": "111 Harrow St",
+    "addressLine2": "Brooklyn, NY",
+    "hours": "Pon–Sob, 10:00–2:00",
+    "bookingHeading": "Rezerwacja",
+    "email": "book@oneelevenstudio.com",
+    "phone": "+1 (718) 555-0111",
+    "followHeading": "Obserwuj",
+    "socialLinks": [
+      { "label": "Instagram", "url": "#" },
+      { "label": "YouTube", "url": "#" },
+      { "label": "Bandcamp", "url": "#" }
+    ],
+    "copyright": "© One Eleven Studio",
+    "availabilityNote": "Cały sprzęt w zależności od dostępności"
   }
 }
