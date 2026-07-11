@@ -317,7 +317,12 @@ function PortfolioPreview({ entry, getAsset }) {
         { style: { aspectRatio: '1', background: d.bg || '#1a1a1a', border: '1px solid var(--border-soft)', marginBottom: 8, overflow: 'hidden' } },
         photoSrc && h('img', { src: photoSrc, style: { width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.05)' } })
       ),
-      h('div', { style: { fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--text-tertiary)' } }, d.caption)
+      h('div', { style: { fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--text-tertiary)' } }, d.caption),
+      h(
+        'div',
+        { style: { fontFamily: 'var(--font-mono)', fontSize: 10, color: d.audioSrc ? 'var(--accent)' : 'var(--text-quiet)', marginTop: 6, textTransform: 'uppercase', letterSpacing: '.05em' } },
+        d.audioSrc ? 'Prawdziwe audio podpięte' : 'Bez pliku — odtwarzanie symulowane'
+      )
     )
   );
 }

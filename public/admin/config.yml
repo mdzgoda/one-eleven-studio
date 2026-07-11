@@ -170,6 +170,7 @@ collections:
       - { label: Zdjęcie, name: photo, widget: image, required: false, hint: 'Opcjonalne — jeśli dodane, zastępuje kolorowy kafelek czarno-białym zdjęciem' }
       - { label: 'Kolor tła', name: bg, widget: color, hint: 'Używany jako kafelek, gdy nie dodano zdjęcia' }
       - { label: Podpis, name: caption, widget: string }
+      - { label: 'Plik audio', name: audioSrc, widget: file, required: false, hint: 'Opcjonalne — mp3/wav odtwarzane po kliknięciu kafelka. Bez pliku odtwarzanie jest symulowane (pasek postępu bez dźwięku).' }
 
   - name: testimonials
     label: Opinie

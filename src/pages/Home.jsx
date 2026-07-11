@@ -168,7 +168,7 @@ export function Home() {
   );
 }
 
-function PortfolioTile({ bg, caption, photo }) {
+function PortfolioTile({ bg, caption, photo, audioSrc }) {
   const [hover, setHover] = useState(false);
   const { track, playing, play } = usePlayer();
   const isActive = track && track.caption === caption;
@@ -179,7 +179,7 @@ function PortfolioTile({ bg, caption, photo }) {
     <div>
       <button
         type="button"
-        onClick={() => play({ bg, caption, photo })}
+        onClick={() => play({ bg, caption, photo, audioSrc })}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         aria-label={(isPlaying ? 'Pauza: ' : 'Odtwórz: ') + caption}
