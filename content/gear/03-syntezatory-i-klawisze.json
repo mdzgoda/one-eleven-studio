@@ -1,4 +1,12 @@
 {
+  "visible": true,
   "title": "Syntezatory i Klawisze",
-  "items": ["Moog Modular 55", "Sequential Prophet-5", "Buchla 200", "Yamaha CS-80", "Mellotron M400", "Hammond B3"]
+  "items": [
+    "Moog Modular 55",
+    "Sequential Prophet-5",
+    "Buchla 200",
+    "Yamaha CS-80",
+    "Mellotron M400",
+    "Hammond B3"
+  ]
 }
