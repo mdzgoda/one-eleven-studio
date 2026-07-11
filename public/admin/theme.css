@@ -94,7 +94,7 @@ body,
 [class*="ListCardTitle"] {
   color: var(--oes-fg) !important;
 }
-[class*="ListCardLink"]:hover [class*="ListCard-card-card"] {
+[class*="ListCardLink"]:hover {
   background: var(--oes-hover-bg) !important;
 }
 
@@ -130,6 +130,11 @@ body,
 [class*="FieldLabel"] {
   color: rgba(242, 241, 236, 0.6) !important;
   background: transparent !important;
+}
+/* Decap draws a decorative bar via ::after that's white-on-white (invisible)
+   in the default theme — hide it, since the reference design has no such mark */
+[class*="FieldLabel"]::after {
+  display: none !important;
 }
 [class*="ControlHint"] {
   color: rgba(242, 241, 236, 0.45) !important;
