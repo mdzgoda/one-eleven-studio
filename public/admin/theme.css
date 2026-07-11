@@ -175,6 +175,31 @@ body,
   fill: var(--oes-fg) !important;
 }
 
+/* Dropdown menus (account menu, Publish menu, ...) */
+[class*="DropdownList"] {
+  background: #171717 !important;
+  border: 1px solid var(--oes-border-strong) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+[class*="StyledMenuItem"] {
+  background: transparent !important;
+  color: var(--oes-fg) !important;
+}
+[class*="StyledMenuItem"]:hover {
+  background: var(--oes-hover-bg) !important;
+}
+
+/* Boolean (visible) toggle — make on/off unambiguous at a glance */
+[class*="ToggleBackground"] {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+[role='switch'][aria-checked='true'] [class*="ToggleBackground"] {
+  background: #d9684f !important;
+}
+[class*="ToggleHandle"] {
+  background: #fff !important;
+}
+
 /* Inputs — native elements, robust regardless of Decap's internal class names */
 input[type='text'],
 input[type='email'],
