@@ -1,0 +1,37 @@
+name: Optimize uploaded images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/uploads/**'
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip optimize]')"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - run: node scripts/optimize-images.js public/uploads
+
+      - name: Commit optimized images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/uploads
+          if git diff --cached --quiet; then
+            echo "Nothing to optimize"
+          else
+            git commit -m "Optimize uploaded images [skip optimize]"
+            git push
+          fi

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { usePlayer } from '../../context/PlayerContext';
+import { useBreakpoint, pick } from '../../hooks/useBreakpoint';
 
 function fmtTime(s) {
   const m = Math.floor(s / 60);
@@ -139,6 +140,9 @@ function ScrubBar({ elapsed, duration, onSeek }) {
 export function PlayerBar() {
   const { track, playing, elapsed, duration, toggle, close, seek } = usePlayer();
   const visible = !!track;
+  const bp = useBreakpoint();
+  const sm = bp === 'sm';
+  const padX = pick({ sm: 16, md: 32, lg: 52 }, bp);
 
   return (
     <div
@@ -160,71 +164,101 @@ export function PlayerBar() {
         style={{
           maxWidth: 1280,
           margin: '0 auto',
-          padding: '0 52px',
-          height: 76,
+          padding: `0 ${padX}px`,
+          height: sm ? 64 : 76,
           display: 'flex',
           alignItems: 'center',
-          gap: 20,
+          gap: sm ? 12 : 20,
         }}
       >
-        <div
-          style={{
-            width: 44,
-            height: 44,
-            background: track ? track.bg : 'var(--surface-media)',
-            border: '1px solid var(--border-soft)',
-            flexShrink: 0,
-            overflow: 'hidden',
-          }}
-        >
-          {track && track.photo && (
-            <img
-              src={track.photo}
-              alt={track.caption}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.05)' }}
-            />
-          )}
-        </div>
-
-        <div style={{ minWidth: 0, width: 220, flexShrink: 0 }}>
+        {!sm && (
           <div
             style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 10,
-              letterSpacing: 'var(--tracking-eyebrow)',
-              textTransform: 'uppercase',
-              color: 'var(--text-quiet)',
-              marginBottom: 4,
-            }}
-          >
-            Portfolio
-          </div>
-          <div
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 13,
-              color: 'var(--text-primary)',
-              whiteSpace: 'nowrap',
+              width: 44,
+              height: 44,
+              background: track ? track.bg : 'var(--surface-media)',
+              border: '1px solid var(--border-soft)',
+              flexShrink: 0,
               overflow: 'hidden',
-              textOverflow: 'ellipsis',
             }}
           >
-            {track ? track.caption : ''}
+            {track && track.photo && (
+              <img
+                src={track.photo}
+                alt={track.caption}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: playing ? 'none' : 'grayscale(1) contrast(1.05)',
+                  transition: 'filter .2s ease',
+                }}
+              />
+            )}
           </div>
-        </div>
+        )}
+
+        {!sm && (
+          <div style={{ minWidth: 0, width: 220, flexShrink: 0 }}>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 10,
+                letterSpacing: 'var(--tracking-eyebrow)',
+                textTransform: 'uppercase',
+                color: 'var(--text-quiet)',
+                marginBottom: 4,
+              }}
+            >
+              Portfolio
+            </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 13,
+                color: 'var(--text-primary)',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {track ? track.caption : ''}
+            </div>
+          </div>
+        )}
 
         <IconButton onClick={toggle} label={playing ? 'Pauza' : 'Odtwórz'} active={playing}>
           {playing ? <PauseIcon /> : <PlayIcon />}
         </IconButton>
 
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-tertiary)', width: 34 }}>
-            {fmtTime(elapsed)}
-          </span>
-          <ScrubBar elapsed={elapsed} duration={duration} onSeek={seek} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-tertiary)', width: 34 }}>
-            {fmtTime(duration)}
-          </span>
+        <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: sm ? 2 : 0 }}>
+          {sm && (
+            <div
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                color: 'var(--text-primary)',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {track ? track.caption : ''}
+            </div>
+          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: sm ? 8 : 12 }}>
+            {!sm && (
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-tertiary)', width: 34 }}>
+                {fmtTime(elapsed)}
+              </span>
+            )}
+            <ScrubBar elapsed={elapsed} duration={duration} onSeek={seek} />
+            {!sm && (
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-tertiary)', width: 34 }}>
+                {fmtTime(duration)}
+              </span>
+            )}
+          </div>
         </div>
 
         <IconButton onClick={close} label="Zamknij odtwarzacz">

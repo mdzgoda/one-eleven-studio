@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/optimize-images.js",
     "lint": "oxlint",
     "preview": "vite preview",
     "cms": "decap-server"
@@ -21,6 +21,7 @@
     "@vitejs/plugin-react": "^6.0.3",
     "decap-server": "^3.2.4",
     "oxlint": "^1.71.0",
+    "sharp": "^0.35.3",
     "vite": "^8.1.1"
   }
 }
