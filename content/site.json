@@ -19,18 +19,25 @@
     "crewTitle": "Tworzona przez ludzi, nie presety.",
     "testimonialsEyebrow": "W Ich Słowach",
     "ctaTitle": "Gotowi nagrywać?",
-    "ctaButtonLabel": "Sprawdź Dostępność"
+    "ctaButtonLabel": "Sprawdź Dostępność",
+    "showRooms": true,
+    "showRentals": true,
+    "showWork": true,
+    "showTestimonials": true
   },
   "gearPage": {
+    "visible": true,
     "eyebrow": "Magazyn Sprzętu",
     "title": "Cały sprzęt, jedna lista.",
     "subtitle": "Czterdzieści lat vintage'owego i nowoczesnego sprzętu — dostępne z każdą sesją."
   },
   "crewPage": {
+    "visible": true,
     "eyebrow": "Ekipa",
     "title": "Tworzona przez ludzi, nie presety."
   },
   "bookingPage": {
+    "visible": true,
     "eyebrow": "Rezerwacja",
     "title": "Umów sesję.",
     "subtitle": "Podaj kilka szczegółów o sesji, a odezwiemy się w ciągu 24 godzin z dostępnością i wyceną.",

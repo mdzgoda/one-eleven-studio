@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom';
 import { NavHeader } from '../components/navigation/NavHeader';
 import { Footer } from '../components/navigation/Footer';
 import { Eyebrow } from '../components/core/Eyebrow';
@@ -7,6 +8,8 @@ import { site, crew } from '../content';
 const { crewPage } = site;
 
 export function Crew() {
+  if (crewPage.visible === false) return <Navigate to="/" replace />;
+
   return (
     <div className="page">
       <NavHeader />

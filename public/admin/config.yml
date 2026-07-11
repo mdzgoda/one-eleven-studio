@@ -41,10 +41,15 @@ collections:
               - { label: 'Eyebrow — opinie', name: testimonialsEyebrow, widget: string }
               - { label: 'Tytuł CTA', name: ctaTitle, widget: string }
               - { label: 'Etykieta przycisku CTA', name: ctaButtonLabel, widget: string }
+              - { label: 'Pokaż sekcję: Sale', name: showRooms, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć całą sekcję "Sale" na stronie głównej' }
+              - { label: 'Pokaż sekcję: Wypożyczenia', name: showRentals, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć całą sekcję "Wypożycz Rzadkości"' }
+              - { label: 'Pokaż sekcję: Prace', name: showWork, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć statystyki i siatkę portfolio' }
+              - { label: 'Pokaż sekcję: Opinie', name: showTestimonials, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć sekcję "W Ich Słowach"' }
           - label: Strona sprzętu
             name: gearPage
             widget: object
             fields:
+              - { label: 'Pokaż stronę /gear', name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć link w menu, sekcję na stronie głównej i całą stronę /gear (bezpośrednie wejście przekieruje na stronę główną)' }
               - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały napis nad tytułem na górze strony /gear' }
               - { label: Tytuł, name: title, widget: string }
               - { label: Podtytuł, name: subtitle, widget: text }
@@ -52,12 +57,14 @@ collections:
             name: crewPage
             widget: object
             fields:
+              - { label: 'Pokaż stronę /crew', name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć link w menu, sekcję na stronie głównej i całą stronę /crew (bezpośrednie wejście przekieruje na stronę główną)' }
               - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały napis nad tytułem na górze strony /crew' }
               - { label: Tytuł, name: title, widget: string }
           - label: Strona rezerwacji
             name: bookingPage
             widget: object
             fields:
+              - { label: 'Pokaż stronę /book', name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć link w menu, przyciski rezerwacji i całą stronę /book (bezpośrednie wejście przekieruje na stronę główną)' }
               - { label: Eyebrow, name: eyebrow, widget: string, hint: 'Mały napis nad tytułem na górze strony /book' }
               - { label: Tytuł, name: title, widget: string }
               - { label: Podtytuł, name: subtitle, widget: text }
@@ -92,6 +99,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczny, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć tę salę na stronie bez usuwania jej treści' }
       - { label: 'Etykieta (np. SALA A)', name: label, widget: string }
       - { label: Nazwa, name: name, widget: string }
       - { label: Opis, name: description, widget: text }
@@ -105,6 +113,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczna, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć tę grupę sprzętu bez usuwania jej treści' }
       - { label: 'Nazwa grupy', name: title, widget: string }
       - label: Pozycje
         name: items
@@ -119,6 +128,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczne, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć tę pozycję wypożyczenia bez usuwania jej treści' }
       - { label: Nazwa, name: name, widget: string }
       - { label: Opis, name: description, widget: text }
 
@@ -130,6 +140,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczny, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć tę osobę bez usuwania jej danych' }
       - { label: Zdjęcie, name: photoSrc, widget: image, required: false, hint: 'Opcjonalne — kwadratowe zdjęcie, wyświetlane czarno-białe. Bez zdjęcia pokazuje się puste pole z narożnikami.' }
       - { label: 'Imię i nazwisko', name: name, widget: string }
       - { label: Rola, name: role, widget: string }
@@ -143,6 +154,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczna, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć tę statystykę bez usuwania jej' }
       - { label: Wartość, name: value, widget: string }
       - { label: Etykieta, name: label, widget: string }
 
@@ -154,6 +166,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczny, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć ten kafelek bez usuwania jego treści' }
       - { label: Zdjęcie, name: photo, widget: image, required: false, hint: 'Opcjonalne — jeśli dodane, zastępuje kolorowy kafelek czarno-białym zdjęciem' }
       - { label: 'Kolor tła', name: bg, widget: color, hint: 'Używany jako kafelek, gdy nie dodano zdjęcia' }
       - { label: Podpis, name: caption, widget: string }
@@ -166,5 +179,6 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Widoczna, name: visible, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć tę opinię bez usuwania jej treści' }
       - { label: Cytat, name: quote, widget: text }
       - { label: Autor, name: attribution, widget: string }

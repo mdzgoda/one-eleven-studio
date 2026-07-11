@@ -25,6 +25,34 @@ function Frame({ children }) {
   return h('div', { style: { minHeight: '100%' } }, children);
 }
 
+function HiddenBadge() {
+  return h(
+    'span',
+    {
+      style: {
+        marginLeft: 10,
+        fontFamily: 'var(--font-mono)',
+        fontSize: 10,
+        color: 'var(--accent)',
+        border: '1px solid var(--accent)',
+        padding: '2px 7px',
+        textTransform: 'uppercase',
+        letterSpacing: '.05em',
+      },
+    },
+    'Ukryte na stronie'
+  );
+}
+
+function EntryFrame({ label, hidden, children }) {
+  return h(
+    Frame,
+    null,
+    h(SectionLabel, null, label, hidden && h(HiddenBadge)),
+    h('div', { style: { opacity: hidden ? 0.4 : 1 } }, children)
+  );
+}
+
 function SitePreview({ entry, getAsset }) {
   var logoSrc = resolveAsset(getAsset, val(entry, ['branding', 'logoMark']));
   var heroSrc = resolveAsset(getAsset, val(entry, ['home', 'heroImage']));
@@ -99,35 +127,36 @@ function SitePreview({ entry, getAsset }) {
     h(
       'div',
       { style: { padding: '18px 28px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, fontSize: 12 } },
-      h('div', null, h('span', { style: { color: 'var(--accent)' } }, home.roomsEyebrow), ' — ', home.roomsTitle),
-      h('div', null, h('span', { style: { color: 'var(--accent)' } }, home.gearEyebrow)),
-      h('div', null, h('span', { style: { color: 'var(--accent)' } }, home.rentEyebrow), ' — ', home.rentTitle),
-      h('div', null, h('span', { style: { color: 'var(--accent)' } }, home.crewEyebrow), ' — ', home.crewTitle),
-      h('div', null, h('span', { style: { color: 'var(--accent)' } }, home.testimonialsEyebrow)),
-      h('div', null, home.ctaTitle, ' · ', h('span', { style: { color: 'var(--accent)' } }, home.ctaButtonLabel))
+      h('div', { style: { opacity: home.showRooms === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.roomsEyebrow), ' — ', home.roomsTitle, home.showRooms === false && h(HiddenBadge)),
+      h('div', { style: { opacity: gearPage.visible === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.gearEyebrow), gearPage.visible === false && h(HiddenBadge)),
+      h('div', { style: { opacity: home.showRentals === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.rentEyebrow), ' — ', home.rentTitle, home.showRentals === false && h(HiddenBadge)),
+      h('div', { style: { opacity: crewPage.visible === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.crewEyebrow), ' — ', home.crewTitle, crewPage.visible === false && h(HiddenBadge)),
+      h('div', { style: { opacity: home.showTestimonials === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.testimonialsEyebrow), home.showTestimonials === false && h(HiddenBadge)),
+      h('div', { style: { opacity: home.showWork === false ? 0.4 : 1 } }, 'Statystyki i portfolio', home.showWork === false && h(HiddenBadge)),
+      h('div', { style: { opacity: bookingPage.visible === false ? 0.4 : 1 } }, home.ctaTitle, ' · ', h('span', { style: { color: 'var(--accent)' } }, home.ctaButtonLabel), bookingPage.visible === false && h(HiddenBadge))
     ),
 
-    h(SectionLabel, null, 'Strona: Sprzęt (/gear)'),
+    h(SectionLabel, null, 'Strona: Sprzęt (/gear)', gearPage.visible === false && h(HiddenBadge)),
     h(
       'div',
-      { style: { padding: '18px 28px' } },
+      { style: { padding: '18px 28px', opacity: gearPage.visible === false ? 0.4 : 1 } },
       h('div', { style: { fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 8 } }, gearPage.eyebrow),
       h('h2', { style: { fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 22, margin: '0 0 8px' } }, gearPage.title),
       h('p', { style: { fontSize: 13, color: 'var(--text-secondary)', margin: 0 } }, gearPage.subtitle)
     ),
 
-    h(SectionLabel, null, 'Strona: Ekipa (/crew)'),
+    h(SectionLabel, null, 'Strona: Ekipa (/crew)', crewPage.visible === false && h(HiddenBadge)),
     h(
       'div',
-      { style: { padding: '18px 28px' } },
+      { style: { padding: '18px 28px', opacity: crewPage.visible === false ? 0.4 : 1 } },
       h('div', { style: { fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 8 } }, crewPage.eyebrow),
       h('h2', { style: { fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 22, margin: 0 } }, crewPage.title)
     ),
 
-    h(SectionLabel, null, 'Strona: Rezerwacja (/book)'),
+    h(SectionLabel, null, 'Strona: Rezerwacja (/book)', bookingPage.visible === false && h(HiddenBadge)),
     h(
       'div',
-      { style: { padding: '18px 28px' } },
+      { style: { padding: '18px 28px', opacity: bookingPage.visible === false ? 0.4 : 1 } },
       h('div', { style: { fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 8 } }, bookingPage.eyebrow),
       h('h2', { style: { fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 22, margin: '0 0 8px' } }, bookingPage.title),
       h('p', { style: { fontSize: 13, color: 'var(--text-secondary)', margin: '0 0 8px' } }, bookingPage.subtitle),
@@ -181,9 +210,8 @@ function SitePreview({ entry, getAsset }) {
 function RoomPreview({ entry }) {
   var d = val(entry, []) || {};
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Karta sali — sekcja "Sale" na stronie głównej'),
+    EntryFrame,
+    { label: 'Karta sali — sekcja "Sale" na stronie głównej', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 360 } },
@@ -199,9 +227,8 @@ function GearPreview({ entry }) {
   var d = val(entry, []) || {};
   var items = d.items || [];
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Grupa sprzętu — strony "Sprzęt" i sekcja "Magazyn Sprzętu"'),
+    EntryFrame,
+    { label: 'Grupa sprzętu — strony "Sprzęt" i sekcja "Magazyn Sprzętu"', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px' } },
@@ -224,9 +251,8 @@ function GearPreview({ entry }) {
 function RentalPreview({ entry }) {
   var d = val(entry, []) || {};
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Karta wypożyczenia — sekcja "Wypożycz Rzadkości"'),
+    EntryFrame,
+    { label: 'Karta wypożyczenia — sekcja "Wypożycz Rzadkości"', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 320, border: '1px solid var(--line-tag)' } },
@@ -246,9 +272,8 @@ function CrewPreview({ entry, getAsset }) {
   var d = val(entry, []) || {};
   var photoSrc = resolveAsset(getAsset, d.photoSrc);
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Karta osoby — sekcja "Ekipa" i strona "Ekipa"'),
+    EntryFrame,
+    { label: 'Karta osoby — sekcja "Ekipa" i strona "Ekipa"', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 220 } },
@@ -267,9 +292,8 @@ function CrewPreview({ entry, getAsset }) {
 function StatPreview({ entry }) {
   var d = val(entry, []) || {};
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Statystyka — sekcja "Prace" na stronie głównej'),
+    EntryFrame,
+    { label: 'Statystyka — sekcja "Prace" na stronie głównej', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px' } },
@@ -283,9 +307,8 @@ function PortfolioPreview({ entry, getAsset }) {
   var d = val(entry, []) || {};
   var photoSrc = resolveAsset(getAsset, d.photo);
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Kafelek portfolio — sekcja "Prace" na stronie głównej'),
+    EntryFrame,
+    { label: 'Kafelek portfolio — sekcja "Prace" na stronie głównej', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 180 } },
@@ -302,9 +325,8 @@ function PortfolioPreview({ entry, getAsset }) {
 function TestimonialPreview({ entry }) {
   var d = val(entry, []) || {};
   return h(
-    Frame,
-    null,
-    h(SectionLabel, null, 'Opinia — sekcja "W Ich Słowach" na stronie głównej'),
+    EntryFrame,
+    { label: 'Opinia — sekcja "W Ich Słowach" na stronie głównej', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 420 } },

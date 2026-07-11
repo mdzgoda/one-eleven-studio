@@ -2,14 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { site } from '../../content';
 
-const { branding } = site;
-
-const navLinks = [
-  { href: '/#studio', label: 'Studio' },
-  { href: '/gear', label: 'Sprzęt' },
-  { href: '/crew', label: 'Ekipa' },
-  { href: '/#work', label: 'Prace' },
-];
+const { branding, home, gearPage, crewPage, bookingPage } = site;
 
 function NavLink({ href, children, accent }) {
   const [hover, setHover] = useState(false);
@@ -47,14 +40,15 @@ export function NavHeader() {
         <img src={branding.logoMark} style={{ height: 50, display: 'block' }} alt="One Eleven Studio" />
       </Link>
       <div style={{ display: 'flex', gap: 32 }}>
-        {navLinks.map((l) => (
-          <NavLink key={l.href} href={l.href}>
-            {l.label}
+        {home.showRooms !== false && <NavLink href="/#studio">Studio</NavLink>}
+        {gearPage.visible !== false && <NavLink href="/gear">Sprzęt</NavLink>}
+        {crewPage.visible !== false && <NavLink href="/crew">Ekipa</NavLink>}
+        {home.showWork !== false && <NavLink href="/#work">Prace</NavLink>}
+        {bookingPage.visible !== false && (
+          <NavLink href="/book" accent>
+            Rezerwacja →
           </NavLink>
-        ))}
-        <NavLink href="/book" accent>
-          Rezerwacja →
-        </NavLink>
+        )}
       </div>
     </div>
   );

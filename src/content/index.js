@@ -1,7 +1,8 @@
 function loadCollection(globResult) {
   return Object.keys(globResult)
     .sort()
-    .map((key) => globResult[key]);
+    .map((key) => globResult[key])
+    .filter((entry) => entry.visible !== false);
 }
 
 export const site = Object.values(

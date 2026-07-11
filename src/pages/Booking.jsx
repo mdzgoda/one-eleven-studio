@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { NavHeader } from '../components/navigation/NavHeader';
 import { Footer } from '../components/navigation/Footer';
 import { Eyebrow } from '../components/core/Eyebrow';
@@ -41,6 +42,8 @@ const initialForm = { name: '', email: '', room: '', date: '' };
 export function Booking() {
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
+
+  if (bookingPage.visible === false) return <Navigate to="/" replace />;
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 

@@ -2,5 +2,6 @@
   "label": "SALA A",
   "name": "Sala Live",
   "description": "76 m², 5,5 m sufitu, trzy kabiny izolacyjne. Stworzona, by nagrać cały zespół na żywo, głośno, za jednym podejściem.",
-  "specs": "NEVE 8068 · STUDER A827"
+  "specs": "NEVE 8068 · STUDER A827",
+  "visible": true
 }
