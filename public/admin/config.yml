@@ -130,6 +130,7 @@ collections:
     extension: json
     format: json
     fields:
+      - { label: Zdjęcie, name: photoSrc, widget: image, required: false, hint: 'Opcjonalne — kwadratowe zdjęcie, wyświetlane czarno-białe. Bez zdjęcia pokazuje się puste pole z narożnikami.' }
       - { label: 'Imię i nazwisko', name: name, widget: string }
       - { label: Rola, name: role, widget: string }
       - { label: Bio, name: bio, widget: text }
@@ -153,7 +154,8 @@ collections:
     extension: json
     format: json
     fields:
-      - { label: 'Kolor tła', name: bg, widget: color }
+      - { label: Zdjęcie, name: photo, widget: image, required: false, hint: 'Opcjonalne — jeśli dodane, zastępuje kolorowy kafelek czarno-białym zdjęciem' }
+      - { label: 'Kolor tła', name: bg, widget: color, hint: 'Używany jako kafelek, gdy nie dodano zdjęcia' }
       - { label: Podpis, name: caption, widget: string }
 
   - name: testimonials

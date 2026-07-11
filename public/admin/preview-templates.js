@@ -242,8 +242,9 @@ function RentalPreview({ entry }) {
   );
 }
 
-function CrewPreview({ entry }) {
+function CrewPreview({ entry, getAsset }) {
   var d = val(entry, []) || {};
+  var photoSrc = resolveAsset(getAsset, d.photoSrc);
   return h(
     Frame,
     null,
@@ -251,7 +252,11 @@ function CrewPreview({ entry }) {
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 220 } },
-      h('div', { style: { width: '100%', aspectRatio: '1', background: 'var(--surface-media)', marginBottom: 16 } }),
+      h(
+        'div',
+        { style: { width: '100%', aspectRatio: '1', background: 'var(--surface-media)', marginBottom: 16, overflow: 'hidden' } },
+        photoSrc && h('img', { src: photoSrc, style: { width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1)' } })
+      ),
       h('div', { style: { fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16, marginBottom: 4 } }, d.name),
       h('div', { style: { fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--accent)', marginBottom: 10 } }, d.role),
       h('p', { style: { fontSize: 13, color: 'var(--text-tertiary)', lineHeight: 1.5, margin: 0 } }, d.bio)
@@ -274,8 +279,9 @@ function StatPreview({ entry }) {
   );
 }
 
-function PortfolioPreview({ entry }) {
+function PortfolioPreview({ entry, getAsset }) {
   var d = val(entry, []) || {};
+  var photoSrc = resolveAsset(getAsset, d.photo);
   return h(
     Frame,
     null,
@@ -283,7 +289,11 @@ function PortfolioPreview({ entry }) {
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 180 } },
-      h('div', { style: { aspectRatio: '1', background: d.bg || '#1a1a1a', border: '1px solid var(--border-soft)', marginBottom: 8 } }),
+      h(
+        'div',
+        { style: { aspectRatio: '1', background: d.bg || '#1a1a1a', border: '1px solid var(--border-soft)', marginBottom: 8, overflow: 'hidden' } },
+        photoSrc && h('img', { src: photoSrc, style: { width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.05)' } })
+      ),
       h('div', { style: { fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--text-tertiary)' } }, d.caption)
     )
   );

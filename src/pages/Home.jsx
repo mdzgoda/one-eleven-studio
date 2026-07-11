@@ -152,13 +152,21 @@ export function Home() {
   );
 }
 
-function PortfolioTile({ bg, caption }) {
+function PortfolioTile({ bg, caption, photo }) {
   return (
     <div>
       <div
         className="portfolio-tile"
-        style={{ aspectRatio: '1', background: bg, border: '1px solid var(--border-soft)', marginBottom: 8, transition: 'opacity .2s ease' }}
-      />
+        style={{ aspectRatio: '1', background: bg, border: '1px solid var(--border-soft)', marginBottom: 8, transition: 'opacity .2s ease', overflow: 'hidden' }}
+      >
+        {photo && (
+          <img
+            src={photo}
+            alt={caption}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.05)' }}
+          />
+        )}
+      </div>
       <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--text-tertiary)' }}>{caption}</div>
     </div>
   );
