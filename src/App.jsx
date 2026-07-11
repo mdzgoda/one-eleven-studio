@@ -4,6 +4,8 @@ import { Home } from './pages/Home';
 import { Gear } from './pages/Gear';
 import { Crew } from './pages/Crew';
 import { Booking } from './pages/Booking';
+import { PlayerProvider } from './context/PlayerContext';
+import { PlayerBar } from './components/player/PlayerBar';
 
 function ScrollHandler() {
   const location = useLocation();
@@ -25,13 +27,16 @@ function ScrollHandler() {
 function App() {
   return (
     <BrowserRouter>
-      <ScrollHandler />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gear" element={<Gear />} />
-        <Route path="/crew" element={<Crew />} />
-        <Route path="/book" element={<Booking />} />
-      </Routes>
+      <PlayerProvider>
+        <ScrollHandler />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gear" element={<Gear />} />
+          <Route path="/crew" element={<Crew />} />
+          <Route path="/book" element={<Booking />} />
+        </Routes>
+        <PlayerBar />
+      </PlayerProvider>
     </BrowserRouter>
   );
 }

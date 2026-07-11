@@ -7,6 +7,7 @@ import { RoomCard } from '../components/cards/RoomCard';
 import { RentCard } from '../components/cards/RentCard';
 import { CrewCard } from '../components/cards/CrewCard';
 import { site, rooms, gearGroups, rentals, crew, stats, portfolio, testimonials } from '../content';
+import { usePlayer } from '../context/PlayerContext';
 
 const { home, gearPage, crewPage, bookingPage } = site;
 
@@ -167,11 +168,25 @@ export function Home() {
 }
 
 function PortfolioTile({ bg, caption, photo }) {
+  const { track, playing, play } = usePlayer();
+  const isActive = track && track.caption === caption;
+
   return (
-    <div>
+    <button
+      type="button"
+      onClick={() => play({ bg, caption, photo })}
+      style={{ display: 'block', width: '100%', padding: 0, border: 0, background: 'none', font: 'inherit', color: 'inherit', textAlign: 'left', cursor: 'pointer' }}
+    >
       <div
         className="portfolio-tile"
-        style={{ aspectRatio: '1', background: bg, border: '1px solid var(--border-soft)', marginBottom: 8, transition: 'opacity .2s ease', overflow: 'hidden' }}
+        style={{
+          aspectRatio: '1',
+          background: bg,
+          border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border-soft)'}`,
+          marginBottom: 8,
+          transition: 'opacity .2s ease, border-color .2s ease',
+          overflow: 'hidden',
+        }}
       >
         {photo && (
           <img
@@ -181,7 +196,10 @@ function PortfolioTile({ bg, caption, photo }) {
           />
         )}
       </div>
-      <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--text-tertiary)' }}>{caption}</div>
-    </div>
+      <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: isActive ? 'var(--accent)' : 'var(--text-tertiary)' }}>
+        {isActive && playing ? '♪ ' : ''}
+        {caption}
+      </div>
+    </button>
   );
 }
