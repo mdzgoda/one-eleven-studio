@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavHeader } from '../components/navigation/NavHeader';
 import { Footer } from '../components/navigation/Footer';
 import { Button } from '../components/core/Button';
@@ -168,23 +169,31 @@ export function Home() {
 }
 
 function PortfolioTile({ bg, caption, photo }) {
+  const [hover, setHover] = useState(false);
   const { track, playing, play } = usePlayer();
   const isActive = track && track.caption === caption;
+  const isPlaying = isActive && playing;
+  const showOverlay = hover || isActive;
 
   return (
-    <button
-      type="button"
-      onClick={() => play({ bg, caption, photo })}
-      style={{ display: 'block', width: '100%', padding: 0, border: 0, background: 'none', font: 'inherit', color: 'inherit', textAlign: 'left', cursor: 'pointer' }}
-    >
-      <div
-        className="portfolio-tile"
+    <div>
+      <button
+        type="button"
+        onClick={() => play({ bg, caption, photo })}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        aria-label={(isPlaying ? 'Pauza: ' : 'Odtwórz: ') + caption}
         style={{
+          all: 'unset',
+          display: 'block',
+          width: '100%',
+          position: 'relative',
           aspectRatio: '1',
           background: bg,
           border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border-soft)'}`,
           marginBottom: 8,
-          transition: 'opacity .2s ease, border-color .2s ease',
+          cursor: 'pointer',
+          boxSizing: 'border-box',
           overflow: 'hidden',
         }}
       >
@@ -192,14 +201,55 @@ function PortfolioTile({ bg, caption, photo }) {
           <img
             src={photo}
             alt={caption}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.05)' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1) contrast(1.05)', display: 'block' }}
           />
         )}
-      </div>
-      <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: isActive ? 'var(--accent)' : 'var(--text-tertiary)' }}>
-        {isActive && playing ? '♪ ' : ''}
-        {caption}
-      </div>
-    </button>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(11,11,12,.5)',
+            opacity: showOverlay ? 1 : 0,
+            transition: 'opacity .2s ease',
+          }}
+        >
+          <div
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: '50%',
+              border: `1px solid ${isActive ? 'var(--accent)' : 'var(--cream)'}`,
+              background: isActive ? 'var(--accent)' : 'transparent',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--cream)',
+            }}
+          >
+            {isPlaying ? (
+              <div style={{ display: 'flex', gap: 3 }}>
+                <div style={{ width: 3, height: 12, background: 'currentColor' }} />
+                <div style={{ width: 3, height: 12, background: 'currentColor' }} />
+              </div>
+            ) : (
+              <div
+                style={{
+                  width: 0,
+                  height: 0,
+                  borderTop: '7px solid transparent',
+                  borderBottom: '7px solid transparent',
+                  borderLeft: '11px solid currentColor',
+                  marginLeft: 3,
+                }}
+              />
+            )}
+          </div>
+        </div>
+      </button>
+      <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: isActive ? 'var(--accent)' : 'var(--text-tertiary)' }}>{caption}</div>
+    </div>
   );
 }
