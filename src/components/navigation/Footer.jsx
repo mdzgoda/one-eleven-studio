@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { site } from '../../content';
 import { useIsMobile } from '../../hooks/useBreakpoint';
+import { telHref, websiteHref } from '../../utils/contact';
 
 const { branding, footer } = site;
 
@@ -29,13 +30,15 @@ const label = {
 
 export function Footer() {
   const isMobile = useIsMobile(760);
+  // Links still set to the "#" placeholder are hidden until a real URL is entered
+  const socialLinks = (footer.socialLinks || []).filter((s) => s.url && s.url !== '#');
 
   return (
     <div style={{ padding: isMobile ? '40px 20px 28px' : '48px 52px 36px', borderTop: '1px solid var(--border)' }}>
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr 1fr 1fr',
+          gridTemplateColumns: isMobile ? '1fr' : socialLinks.length ? '1.4fr 1fr 1fr 1fr' : '1.4fr 1fr 1fr',
           gap: isMobile ? 36 : 32,
           marginBottom: isMobile ? 36 : 56,
         }}
@@ -52,28 +55,40 @@ export function Footer() {
             {footer.addressLine1}
             <br />
             {footer.addressLine2}
-            <br />
-            {footer.hours}
+            {footer.hours && (
+              <>
+                <br />
+                {footer.hours}
+              </>
+            )}
           </div>
         </div>
         <div>
           <div style={label}>{footer.bookingHeading}</div>
           <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-            {footer.email}
+            <FooterLink href={`mailto:${footer.email}`}>{footer.email}</FooterLink>
             <br />
-            {footer.phone}
+            <FooterLink href={telHref(footer.phone)}>{footer.phone}</FooterLink>
+            {footer.website && (
+              <>
+                <br />
+                <FooterLink href={websiteHref(footer.website)}>{footer.website}</FooterLink>
+              </>
+            )}
           </div>
         </div>
-        <div>
-          <div style={label}>{footer.followHeading}</div>
-          <div style={{ fontSize: 13, lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
-            {footer.socialLinks.map((s) => (
-              <FooterLink key={s.label} href={s.url}>
-                {s.label}
-              </FooterLink>
-            ))}
+        {socialLinks.length > 0 && (
+          <div>
+            <div style={label}>{footer.followHeading}</div>
+            <div style={{ fontSize: 13, lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
+              {socialLinks.map((s) => (
+                <FooterLink key={s.label} href={s.url}>
+                  {s.label}
+                </FooterLink>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div
         style={{

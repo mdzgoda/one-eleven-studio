@@ -13,8 +13,9 @@
     "roomsEyebrow": "Sale",
     "roomsTitle": "Trzy sale. Jedna filozofia.",
     "gearEyebrow": "Magazyn Sprzętu",
-    "rentEyebrow": "Wypożycz Rzadkości",
-    "rentTitle": "Nie możesz znaleźć odpowiedniej partii? Wypożycz instrument — razem z osobą, która poświęciła mu życie.",
+    "rentEyebrow": "Muzyk Sesyjny & Instrument",
+    "rentTitle": "Ludzie z pasją, unikalne brzmienia",
+    "rentBody": "One Eleven Studio to nie tylko przestrzeń do nagrań i produkcji – to także miejsce spotkań wyjątkowych osobowości muzycznych. Chcemy wspierać artystów i instrumentalistów, dając im przestrzeń do zaprezentowania swoich umiejętności, autorskich kompozycji i unikalnego warsztatu.\n\nPromujemy ludzi, dla których muzyka jest żywą pasją. W naszym studiu możesz poznać nietuzinkowych twórców oraz skorzystać z ich talentu jako muzyków sesyjnych.\n\nSzukasz niepowtarzalnego brzmienia do swojego projektu?\n\nOferujemy dostęp do artystów pracujących z wyjątkowym instrumentarium – od utalentowanych wokalistów, przez klasycznych wirtuozów, po pasjonatów takich jak Stanisław Mazur, który zajmuje się rekonstrukcją dawnych instrumentów i przywraca do życia ich niezwykłe, historyczne brzmienie.\n\nJeśli potrzebujesz żywego, unikalnego instrumentu w swoim utworze (niezależnie od tego, czy są to 400-letnie skrzypce, dawne instrumenty strunowe czy unikalny głos), u nas znajdziesz odpowiednią osobę i przestrzeń do wspólnego tworzenia.",
     "crewEyebrow": "Ekipa",
     "crewTitle": "Tworzona przez ludzi, nie presety.",
     "testimonialsEyebrow": "W Ich Słowach",
@@ -22,7 +23,7 @@
     "ctaButtonLabel": "Sprawdź Dostępność",
     "showRooms": true,
     "showRentals": true,
-    "showWork": true,
+    "showWork": false,
     "showTestimonials": true
   },
   "gearPage": {
@@ -46,19 +47,29 @@
   "footer": {
     "tagline": "Działające studio dla zespołów, ścieżek dźwiękowych i sprzętu, który nagrywa dobre podejście za pierwszym razem.",
     "visitHeading": "Odwiedź",
-    "addressLine1": "111 Harrow St",
-    "addressLine2": "Brooklyn, NY",
-    "hours": "Pon–Sob, 10:00–2:00",
+    "addressLine1": "ul. Tkacka 19-22",
+    "addressLine2": "70-556 Szczecin",
+    "hours": "",
     "bookingHeading": "Rezerwacja",
-    "email": "book@oneelevenstudio.com",
-    "phone": "+1 (718) 555-0111",
+    "email": "woronowicz.kamil@gmail.com",
+    "phone": "533 230 300",
     "followHeading": "Obserwuj",
     "socialLinks": [
-      { "label": "Instagram", "url": "#" },
-      { "label": "YouTube", "url": "#" },
-      { "label": "Bandcamp", "url": "#" }
+      {
+        "label": "Instagram",
+        "url": "#"
+      },
+      {
+        "label": "YouTube",
+        "url": "#"
+      },
+      {
+        "label": "Bandcamp",
+        "url": "#"
+      }
     ],
     "copyright": "© One Eleven Studio",
-    "availabilityNote": "Cały sprzęt w zależności od dostępności"
+    "availabilityNote": "Cały sprzęt w zależności od dostępności",
+    "website": "www.recordoes.com"
   }
 }

@@ -14,6 +14,7 @@ import { useBreakpoint, pick } from '../hooks/useBreakpoint';
 const { home, gearPage, crewPage, bookingPage } = site;
 
 export function Home() {
+  const showTestimonials = home.showTestimonials !== false && testimonials.length > 0;
   const bp = useBreakpoint();
   const sm = bp === 'sm';
   const mdDown = bp !== 'lg';
@@ -144,14 +145,25 @@ export function Home() {
             <div style={{ marginBottom: 18 }}>
               <Eyebrow>{home.rentEyebrow}</Eyebrow>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: pick({ sm: 24, md: 28, lg: 32 }, bp), margin: sm ? '0 0 28px' : '0 0 44px', maxWidth: sm ? 'none' : 760, letterSpacing: '-.01em' }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: pick({ sm: 24, md: 28, lg: 32 }, bp), margin: sm ? '0 0 20px' : '0 0 28px', maxWidth: sm ? 'none' : 760, letterSpacing: '-.01em' }}>
               {home.rentTitle}
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${pick({ sm: 1, md: 2, lg: 4 }, bp)},1fr)`, gap: 20 }}>
-              {rentals.map((r) => (
-                <RentCard key={r.name} {...r} />
-              ))}
-            </div>
+            {home.rentBody && (
+              <div style={{ maxWidth: 760, marginBottom: rentals.length ? (sm ? 28 : 44) : 0 }}>
+                {home.rentBody.split(/\n\s*\n/).filter(Boolean).map((text, i) => (
+                  <p key={i} style={{ fontSize: sm ? 15 : 16, lineHeight: 1.6, color: 'var(--text-secondary)', margin: i === 0 ? 0 : '16px 0 0' }}>
+                    {text}
+                  </p>
+                ))}
+              </div>
+            )}
+            {rentals.length > 0 && (
+              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${pick({ sm: 1, md: 2, lg: 4 }, bp)},1fr)`, gap: 20 }}>
+                {rentals.map((r) => (
+                  <RentCard key={r.name} {...r} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -164,7 +176,7 @@ export function Home() {
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: pick({ sm: 24, md: 28, lg: 32 }, bp), margin: sm ? '0 0 28px' : '0 0 46px', letterSpacing: '-.01em' }}>
             {home.crewTitle}
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${pick({ sm: 2, md: 3, lg: 4 }, bp)},1fr)`, gap: sm ? 18 : 26 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(crew.length || 1, pick({ sm: 1, md: 3, lg: 4 }, bp))},1fr)`, gap: sm ? 32 : `40px ${pick({ md: 44, lg: 72 }, bp)}px` }}>
             {crew.map((c) => (
               <CrewCard key={c.name} {...c} />
             ))}
@@ -174,22 +186,24 @@ export function Home() {
 
       {home.showWork !== false && (
         <div id="work" style={{ padding: `0 ${padX}px ${pick({ sm: 54, md: 76, lg: 90 }, bp)}px` }}>
-          <div
-            style={
-              sm
-                ? { display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '28px 20px', marginBottom: 36 }
-                : { display: 'flex', gap: mdDown ? 40 : 64, flexWrap: 'wrap', marginBottom: 56 }
-            }
-          >
-            {stats.map((s) => (
-              <div key={s.label}>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: pick({ sm: 32, md: 38, lg: 44 }, bp), color: 'var(--accent)' }}>{s.value}</div>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '.06em', marginTop: 8 }}>
-                  {s.label}
+          {stats.length > 0 && (
+            <div
+              style={
+                sm
+                  ? { display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '28px 20px', marginBottom: 36 }
+                  : { display: 'flex', gap: mdDown ? 40 : 64, flexWrap: 'wrap', marginBottom: 56 }
+              }
+            >
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: pick({ sm: 32, md: 38, lg: 44 }, bp), color: 'var(--accent)' }}>{s.value}</div>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '.06em', marginTop: 8 }}>
+                    {s.label}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(${pick({ sm: 2, md: 3, lg: 6 }, bp)},1fr)`, gap: 14 }}>
             {portfolio.map((p) => (
               <PortfolioTile key={p.caption} {...p} />
@@ -198,7 +212,7 @@ export function Home() {
         </div>
       )}
 
-      {home.showTestimonials !== false && (
+      {showTestimonials && (
         <div style={{ padding: sectionPad(90, 90), borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
           <div style={{ marginBottom: sm ? 28 : 44 }}>
             <Eyebrow>{home.testimonialsEyebrow}</Eyebrow>
@@ -218,6 +232,8 @@ export function Home() {
         <div
           id="book"
           style={{
+            // the testimonials block already ends with a rule; add one only when it's absent
+            borderTop: showTestimonials ? 'none' : '1px solid var(--border)',
             padding: sm ? `48px ${padX}px` : `64px ${padX}px`,
             display: 'flex',
             justifyContent: 'space-between',

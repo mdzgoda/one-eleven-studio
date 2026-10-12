@@ -34,15 +34,16 @@ collections:
               - { label: 'Eyebrow — sale', name: roomsEyebrow, widget: string }
               - { label: 'Tytuł — sale', name: roomsTitle, widget: string }
               - { label: 'Eyebrow — sprzęt', name: gearEyebrow, widget: string }
-              - { label: 'Eyebrow — wypożyczenia', name: rentEyebrow, widget: string }
-              - { label: 'Tytuł — wypożyczenia', name: rentTitle, widget: text }
+              - { label: 'Eyebrow — muzyk sesyjny', name: rentEyebrow, widget: string }
+              - { label: 'Tytuł — muzyk sesyjny', name: rentTitle, widget: text }
+              - { label: 'Tekst — muzyk sesyjny', name: rentBody, widget: text, required: false, hint: 'Akapity oddziel pustą linią' }
               - { label: 'Eyebrow — ekipa', name: crewEyebrow, widget: string }
               - { label: 'Tytuł — ekipa', name: crewTitle, widget: string }
               - { label: 'Eyebrow — opinie', name: testimonialsEyebrow, widget: string }
               - { label: 'Tytuł CTA', name: ctaTitle, widget: string }
               - { label: 'Etykieta przycisku CTA', name: ctaButtonLabel, widget: string }
               - { label: 'Pokaż sekcję: Sale', name: showRooms, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć całą sekcję "Sale" na stronie głównej' }
-              - { label: 'Pokaż sekcję: Wypożyczenia', name: showRentals, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć całą sekcję "Wypożycz Rzadkości"' }
+              - { label: 'Pokaż sekcję: Muzyk sesyjny', name: showRentals, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć całą sekcję "Muzyk Sesyjny & Instrument"' }
               - { label: 'Pokaż sekcję: Prace', name: showWork, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć statystyki i siatkę portfolio' }
               - { label: 'Pokaż sekcję: Opinie', name: showTestimonials, widget: boolean, default: true, hint: 'Wyłącz, aby ukryć sekcję "W Ich Słowach"' }
           - label: Strona sprzętu
@@ -81,6 +82,7 @@ collections:
               - { label: 'Nagłówek — rezerwacja', name: bookingHeading, widget: string }
               - { label: E-mail, name: email, widget: string }
               - { label: Telefon, name: phone, widget: string }
+              - { label: 'Strona WWW', name: website, widget: string, required: false, hint: 'np. www.recordoes.com — pokazywana w stopce i na stronie rezerwacji' }
               - { label: 'Nagłówek — obserwuj', name: followHeading, widget: string }
               - label: 'Linki społecznościowe'
                 name: socialLinks
@@ -121,7 +123,7 @@ collections:
         field: { label: Pozycja, name: item, widget: string }
 
   - name: rentals
-    label: Wypożyczenia
+    label: 'Muzyk sesyjny — karty (opcjonalne)'
     folder: content/rentals
     create: true
     slug: '{{fields.name}}'
@@ -144,7 +146,13 @@ collections:
       - { label: Zdjęcie, name: photoSrc, widget: image, required: false, hint: 'Opcjonalne — kwadratowe zdjęcie, wyświetlane czarno-białe. Bez zdjęcia pokazuje się puste pole z narożnikami.' }
       - { label: 'Imię i nazwisko', name: name, widget: string }
       - { label: Rola, name: role, widget: string }
-      - { label: Bio, name: bio, widget: text }
+      - { label: Bio, name: bio, widget: text, hint: 'Akapity oddziel pustą linią' }
+      - label: 'Nagrody i wyróżnienia'
+        name: awards
+        widget: list
+        required: false
+        hint: 'Opcjonalne — wyświetlane pod bio jako "Wybrane nagrody i wyróżnienia"'
+        field: { label: Pozycja, name: award, widget: string }
 
   - name: stats
     label: Statystyki

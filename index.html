@@ -8,6 +8,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Static copy of the booking form so Netlify Forms can detect it at deploy time -->
+    <form name="booking" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="room" />
+      <input name="date" />
+    </form>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
       if (window.netlifyIdentity) {

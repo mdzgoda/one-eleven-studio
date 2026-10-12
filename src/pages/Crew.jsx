@@ -25,7 +25,7 @@ export function Crew() {
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: pick({ sm: 32, md: 40, lg: 48 }, bp), margin: sm ? '0 0 28px' : '0 0 46px', letterSpacing: '-.01em' }}>
           {crewPage.title}
         </h1>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${pick({ sm: 2, md: 3, lg: 4 }, bp)},1fr)`, gap: sm ? 18 : 26 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(crew.length || 1, pick({ sm: 1, md: 3, lg: 4 }, bp))},1fr)`, gap: sm ? 32 : `40px ${pick({ md: 44, lg: 72 }, bp)}px` }}>
           {crew.map((c) => (
             <CrewCard key={c.name} {...c} />
           ))}

@@ -129,7 +129,7 @@ function SitePreview({ entry, getAsset }) {
       { style: { padding: '18px 28px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, fontSize: 12 } },
       h('div', { style: { opacity: home.showRooms === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.roomsEyebrow), ' — ', home.roomsTitle, home.showRooms === false && h(HiddenBadge)),
       h('div', { style: { opacity: gearPage.visible === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.gearEyebrow), gearPage.visible === false && h(HiddenBadge)),
-      h('div', { style: { opacity: home.showRentals === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.rentEyebrow), ' — ', home.rentTitle, home.showRentals === false && h(HiddenBadge)),
+      h('div', { style: { opacity: home.showRentals === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.rentEyebrow), ' — ', home.rentTitle, home.rentBody && h('p', { style: { color: 'var(--text-tertiary)', margin: '6px 0 0', lineHeight: 1.5, whiteSpace: 'pre-line' } }, home.rentBody), home.showRentals === false && h(HiddenBadge)),
       h('div', { style: { opacity: crewPage.visible === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.crewEyebrow), ' — ', home.crewTitle, crewPage.visible === false && h(HiddenBadge)),
       h('div', { style: { opacity: home.showTestimonials === false ? 0.4 : 1 } }, h('span', { style: { color: 'var(--accent)' } }, home.testimonialsEyebrow), home.showTestimonials === false && h(HiddenBadge)),
       h('div', { style: { opacity: home.showWork === false ? 0.4 : 1 } }, 'Statystyki i portfolio', home.showWork === false && h(HiddenBadge)),
@@ -183,7 +183,7 @@ function SitePreview({ entry, getAsset }) {
         'div',
         null,
         h('div', { style: { color: 'var(--accent)', textTransform: 'uppercase', fontSize: 10, marginBottom: 8 } }, footer.bookingHeading),
-        h('div', { style: { color: 'var(--text-secondary)', lineHeight: 1.7 } }, footer.email, h('br'), footer.phone)
+        h('div', { style: { color: 'var(--text-secondary)', lineHeight: 1.7 } }, footer.email, h('br'), footer.phone, footer.website && [h('br', { key: 'br' }), footer.website])
       ),
       h(
         'div',
@@ -252,7 +252,7 @@ function RentalPreview({ entry }) {
   var d = val(entry, []) || {};
   return h(
     EntryFrame,
-    { label: 'Karta wypożyczenia — sekcja "Wypożycz Rzadkości"', hidden: d.visible === false },
+    { label: 'Karta pod sekcją "Muzyk Sesyjny & Instrument"', hidden: d.visible === false },
     h(
       'div',
       { style: { padding: '28px 24px', maxWidth: 320, border: '1px solid var(--line-tag)' } },
@@ -276,15 +276,24 @@ function CrewPreview({ entry, getAsset }) {
     { label: 'Karta osoby — sekcja "Ekipa" i strona "Ekipa"', hidden: d.visible === false },
     h(
       'div',
-      { style: { padding: '28px 24px', maxWidth: 220 } },
-      h(
-        'div',
-        { style: { width: '100%', aspectRatio: '1', background: 'var(--surface-media)', marginBottom: 16, overflow: 'hidden' } },
-        photoSrc && h('img', { src: photoSrc, style: { width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1)' } })
-      ),
+      { style: { padding: '28px 24px', maxWidth: 320 } },
+      photoSrc &&
+        h(
+          'div',
+          { style: { width: '100%', aspectRatio: '1', background: 'var(--surface-media)', marginBottom: 16, overflow: 'hidden' } },
+          h('img', { src: photoSrc, style: { width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1)' } })
+        ),
       h('div', { style: { fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 16, marginBottom: 4 } }, d.name),
       h('div', { style: { fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--accent)', marginBottom: 10 } }, d.role),
-      h('p', { style: { fontSize: 13, color: 'var(--text-tertiary)', lineHeight: 1.5, margin: 0 } }, d.bio)
+      h('p', { style: { fontSize: 13, color: 'var(--text-tertiary)', lineHeight: 1.5, margin: 0, whiteSpace: 'pre-line' } }, d.bio),
+      d.awards && d.awards.length > 0 && h(
+        'div',
+        { style: { marginTop: 16 } },
+        h('div', { style: { fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 8 } }, 'Wybrane nagrody i wyróżnienia'),
+        d.awards.map(function (a, i) {
+          return h('div', { key: i, style: { fontSize: 12, color: 'var(--text-tertiary)', lineHeight: 1.5, marginBottom: 6 } }, a);
+        })
+      )
     )
   );
 }

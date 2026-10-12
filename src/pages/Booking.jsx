@@ -6,10 +6,13 @@ import { Eyebrow } from '../components/core/Eyebrow';
 import { Button } from '../components/core/Button';
 import { site } from '../content';
 import { useBreakpoint, pick } from '../hooks/useBreakpoint';
+import { telHref, websiteHref } from '../utils/contact';
 
-const { bookingPage } = site;
+const { bookingPage, footer } = site;
 
-function Field({ label, placeholder, value, onChange }) {
+const encode = (data) => new URLSearchParams(data).toString();
+
+function Field({ label, name, placeholder, value, onChange }) {
   const [focus, setFocus] = useState(false);
   return (
     <label style={{ display: 'block', marginBottom: 24 }}>
@@ -17,6 +20,7 @@ function Field({ label, placeholder, value, onChange }) {
         {label}
       </div>
       <input
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -43,6 +47,8 @@ const initialForm = { name: '', email: '', room: '', date: '' };
 export function Booking() {
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const bp = useBreakpoint();
   const sm = bp === 'sm';
   const mdDown = bp !== 'lg';
@@ -52,9 +58,24 @@ export function Booking() {
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  // Delivered by Netlify Forms (see the hidden "booking" form in index.html)
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError(false);
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({ 'form-name': 'booking', ...form }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -78,6 +99,21 @@ export function Booking() {
           <p style={{ fontSize: sm ? 15 : 16, color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: sm ? 'none' : 420 }}>
             {bookingPage.subtitle}
           </p>
+          <div style={{ marginTop: 32, fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+            {footer.addressLine1}
+            <br />
+            {footer.addressLine2}
+            <br />
+            <a href={telHref(footer.phone)} style={{ color: 'var(--accent)' }}>{footer.phone}</a>
+            <br />
+            <a href={`mailto:${footer.email}`} style={{ color: 'var(--accent)' }}>{footer.email}</a>
+            {footer.website && (
+              <>
+                <br />
+                <a href={websiteHref(footer.website)} style={{ color: 'var(--accent)' }}>{footer.website}</a>
+              </>
+            )}
+          </div>
         </div>
         <div style={{ maxWidth: mdDown ? 'none' : 440 }}>
           {submitted ? (
@@ -85,12 +121,17 @@ export function Booking() {
               {bookingPage.thankYou}
             </p>
           ) : (
-            <form onSubmit={handleSubmit}>
-              <Field label="Imię i nazwisko" placeholder="Jan Kowalski" value={form.name} onChange={update('name')} />
-              <Field label="E-mail" placeholder="jan@zespol.com" value={form.email} onChange={update('email')} />
-              <Field label="Sala" placeholder="Sala Live / Studio B / Scena do Scoringu" value={form.room} onChange={update('room')} />
-              <Field label="Preferowana data" placeholder="np. 14 sierpnia 2026" value={form.date} onChange={update('date')} />
-              <Button variant="primary" onClick={handleSubmit}>Wyślij zapytanie</Button>
+            <form name="booking" onSubmit={handleSubmit}>
+              <Field name="name" label="Imię i nazwisko" placeholder="Jan Kowalski" value={form.name} onChange={update('name')} />
+              <Field name="email" label="E-mail" placeholder="jan@zespol.com" value={form.email} onChange={update('email')} />
+              <Field name="room" label="Sala" placeholder="Sala Live / Studio B / Scena do Scoringu" value={form.room} onChange={update('room')} />
+              <Field name="date" label="Preferowana data" placeholder="np. 14 sierpnia 2026" value={form.date} onChange={update('date')} />
+              <Button variant="primary" onClick={handleSubmit}>{sending ? 'Wysyłanie…' : 'Wyślij zapytanie'}</Button>
+              {error && (
+                <p style={{ fontSize: 14, color: 'var(--accent)', lineHeight: 1.5, margin: '16px 0 0' }}>
+                  Nie udało się wysłać formularza. Spróbuj ponownie lub napisz na {footer.email}.
+                </p>
+              )}
             </form>
           )}
         </div>
