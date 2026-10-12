@@ -53,6 +53,8 @@ export function Booking() {
   const sm = bp === 'sm';
   const mdDown = bp !== 'lg';
   const padX = pick({ sm: 20, md: 36, lg: 52 }, bp);
+  // Submissions are delivered to this address, so no address means no form
+  const hasEmail = Boolean(footer.email && footer.email.trim());
 
   if (bookingPage.visible === false) return <Navigate to="/" replace />;
 
@@ -85,7 +87,7 @@ export function Booking() {
         style={{
           padding: `${sm ? 48 : 90}px ${padX}px ${sm ? 56 : 100}px`,
           display: 'grid',
-          gridTemplateColumns: mdDown ? '1fr' : '1fr 1fr',
+          gridTemplateColumns: mdDown || !hasEmail ? '1fr' : '1fr 1fr',
           gap: sm ? 40 : 80,
         }}
       >
@@ -105,8 +107,12 @@ export function Booking() {
             {footer.addressLine2}
             <br />
             <a href={telHref(footer.phone)} style={{ color: 'var(--accent)' }}>{footer.phone}</a>
-            <br />
-            <a href={`mailto:${footer.email}`} style={{ color: 'var(--accent)' }}>{footer.email}</a>
+            {hasEmail && (
+              <>
+                <br />
+                <a href={`mailto:${footer.email}`} style={{ color: 'var(--accent)' }}>{footer.email}</a>
+              </>
+            )}
             {footer.website && (
               <>
                 <br />
@@ -115,26 +121,28 @@ export function Booking() {
             )}
           </div>
         </div>
-        <div style={{ maxWidth: mdDown ? 'none' : 440 }}>
-          {submitted ? (
-            <p style={{ fontSize: 16, color: 'var(--text-primary)', lineHeight: 1.6 }}>
-              {bookingPage.thankYou}
-            </p>
-          ) : (
-            <form name="booking" onSubmit={handleSubmit}>
-              <Field name="name" label="Imię i nazwisko" placeholder="Jan Kowalski" value={form.name} onChange={update('name')} />
-              <Field name="email" label="E-mail" placeholder="jan@zespol.com" value={form.email} onChange={update('email')} />
-              <Field name="room" label="Sala" placeholder="Sala Live / Studio B / Scena do Scoringu" value={form.room} onChange={update('room')} />
-              <Field name="date" label="Preferowana data" placeholder="np. 14 sierpnia 2026" value={form.date} onChange={update('date')} />
-              <Button variant="primary" onClick={handleSubmit}>{sending ? 'Wysyłanie…' : 'Wyślij zapytanie'}</Button>
-              {error && (
-                <p style={{ fontSize: 14, color: 'var(--accent)', lineHeight: 1.5, margin: '16px 0 0' }}>
-                  Nie udało się wysłać formularza. Spróbuj ponownie lub napisz na {footer.email}.
-                </p>
-              )}
-            </form>
-          )}
-        </div>
+        {hasEmail && (
+          <div style={{ maxWidth: mdDown ? 'none' : 440 }}>
+            {submitted ? (
+              <p style={{ fontSize: 16, color: 'var(--text-primary)', lineHeight: 1.6 }}>
+                {bookingPage.thankYou}
+              </p>
+            ) : (
+              <form name="booking" onSubmit={handleSubmit}>
+                <Field name="name" label="Imię i nazwisko" placeholder="Jan Kowalski" value={form.name} onChange={update('name')} />
+                <Field name="email" label="E-mail" placeholder="jan@zespol.com" value={form.email} onChange={update('email')} />
+                <Field name="room" label="Sala" placeholder="Sala Live / Studio B / Scena do Scoringu" value={form.room} onChange={update('room')} />
+                <Field name="date" label="Preferowana data" placeholder="np. 14 sierpnia 2026" value={form.date} onChange={update('date')} />
+                <Button variant="primary" onClick={handleSubmit}>{sending ? 'Wysyłanie…' : 'Wyślij zapytanie'}</Button>
+                {error && (
+                  <p style={{ fontSize: 14, color: 'var(--accent)', lineHeight: 1.5, margin: '16px 0 0' }}>
+                    Nie udało się wysłać formularza. Spróbuj ponownie lub napisz na {footer.email}.
+                  </p>
+                )}
+              </form>
+            )}
+          </div>
+        )}
       </div>
       <Footer />
     </div>

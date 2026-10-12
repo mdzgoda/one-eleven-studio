@@ -80,7 +80,7 @@ collections:
               - { label: 'Adres (linia 2)', name: addressLine2, widget: string }
               - { label: Godziny, name: hours, widget: string }
               - { label: 'Nagłówek — rezerwacja', name: bookingHeading, widget: string }
-              - { label: E-mail, name: email, widget: string }
+              - { label: E-mail, name: email, widget: string, required: false, hint: 'Na ten adres trafiają zapytania z formularza rezerwacji — bez adresu formularz jest ukryty' }
               - { label: Telefon, name: phone, widget: string }
               - { label: 'Strona WWW', name: website, widget: string, required: false, hint: 'np. www.recordoes.com — pokazywana w stopce i na stronie rezerwacji' }
               - { label: 'Nagłówek — obserwuj', name: followHeading, widget: string }

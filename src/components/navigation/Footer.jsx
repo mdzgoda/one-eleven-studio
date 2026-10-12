@@ -66,8 +66,12 @@ export function Footer() {
         <div>
           <div style={label}>{footer.bookingHeading}</div>
           <div style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-            <FooterLink href={`mailto:${footer.email}`}>{footer.email}</FooterLink>
-            <br />
+            {footer.email && (
+              <>
+                <FooterLink href={`mailto:${footer.email}`}>{footer.email}</FooterLink>
+                <br />
+              </>
+            )}
             <FooterLink href={telHref(footer.phone)}>{footer.phone}</FooterLink>
             {footer.website && (
               <>
