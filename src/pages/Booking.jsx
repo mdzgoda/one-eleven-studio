@@ -12,9 +12,10 @@ const { bookingPage, footer } = site;
 
 const encode = (data) => new URLSearchParams(data).toString();
 
-function Field({ label, name, type = 'text', placeholder, value, onChange, onBlur, required, error, autoComplete }) {
+function Field({ label, name, type = 'text', multiline, placeholder, value, onChange, onBlur, required, error, autoComplete }) {
   const [focus, setFocus] = useState(false);
   const errorId = `${name}-error`;
+  const Control = multiline ? 'textarea' : 'input';
   return (
     <label style={{ display: 'block', marginBottom: 24 }}>
       <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: 8 }}>
@@ -30,9 +31,10 @@ function Field({ label, name, type = 'text', placeholder, value, onChange, onBlu
           {required ? 'wymagane' : 'opcjonalne'}
         </span>
       </div>
-      <input
+      <Control
         name={name}
-        type={type}
+        type={multiline ? undefined : type}
+        rows={multiline ? 5 : undefined}
         autoComplete={autoComplete}
         placeholder={placeholder}
         value={value}
@@ -55,6 +57,8 @@ function Field({ label, name, type = 'text', placeholder, value, onChange, onBlu
           fontFamily: 'var(--font-body)',
           fontSize: 14,
           transition: 'border-color .15s ease',
+          resize: multiline ? 'vertical' : undefined,
+          display: 'block',
         }}
       />
       {error && (
@@ -66,13 +70,14 @@ function Field({ label, name, type = 'text', placeholder, value, onChange, onBlu
   );
 }
 
-const initialForm = { name: '', email: '', room: '', date: '' };
+const initialForm = { name: '', email: '', room: '', date: '', message: '' };
 
 const validate = (f) => {
   const errors = {};
   if (!f.name.trim()) errors.name = 'Podaj imię i nazwisko.';
   if (!f.email.trim()) errors.email = 'Podaj adres e-mail.';
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) errors.email = 'Podaj poprawny adres e-mail.';
+  if (!f.message.trim()) errors.message = 'Napisz kilka słów o sesji.';
   return errors;
 };
 
@@ -115,7 +120,7 @@ export function Booking() {
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({ 'form-name': 'booking', ...form, name: form.name.trim(), email: form.email.trim() }),
+        body: encode({ 'form-name': 'booking', ...form, name: form.name.trim(), email: form.email.trim(), message: form.message.trim() }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setSubmitted(true);
@@ -179,6 +184,7 @@ export function Booking() {
                 <Field name="email" type="email" label="E-mail" required autoComplete="email" placeholder="jan@zespol.com" value={form.email} onChange={update('email')} onBlur={touch('email')} error={showError('email')} />
                 <Field name="room" label="Sala" placeholder="Sala Live / Studio B / Scena do Scoringu" value={form.room} onChange={update('room')} />
                 <Field name="date" label="Preferowana data" placeholder="np. 14 sierpnia 2026" value={form.date} onChange={update('date')} />
+                <Field name="message" multiline required label="Wiadomość" placeholder="Opisz projekt: rodzaj nagrania, liczba osób, czego potrzebujesz" value={form.message} onChange={update('message')} onBlur={touch('message')} error={showError('message')} />
                 <Button variant="primary" onClick={handleSubmit}>{sending ? 'Wysyłanie…' : 'Wyślij zapytanie'}</Button>
                 {error && (
                   <p style={{ fontSize: 14, color: 'var(--accent)', lineHeight: 1.5, margin: '16px 0 0' }}>
